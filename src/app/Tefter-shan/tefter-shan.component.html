@@ -1,0 +1,45 @@
+<h1>{{ title }}</h1>
+
+<div class="container">
+  <div class="form-container">
+    
+      <div>
+        <input
+          type="text"
+          placeholder="Title: "
+          [(ngModel)]="newTitle"
+          name="newTitle"
+        />
+      </div>
+
+      <div>
+        <textarea
+          rows="4"
+          placeholder="Note: "
+          [(ngModel)]="newContent"
+          name="newContent"
+        ></textarea>
+      </div>
+
+      <button (click)="addNote()" type="submit">Save note</button>
+
+  </div>
+
+  <div id="textt" *ngIf="!notes.length">
+    <p>No notes available.</p>
+  </div>
+
+  <div *ngFor="let note of notes" (click)="activateNote(note)">
+    <div [ngClass]="{ active: note.isActive }">
+
+      <h4>{{ note.title }}</h4>
+      <p>{{ note.content }}</p>
+
+    </div>
+
+    <div *ngIf="note.isActive">
+      <button (click)="editNote(note)">Edit</button>
+      <button (click)="removeNote(note)">Delete</button>
+    </div>
+  </div>
+</div>
